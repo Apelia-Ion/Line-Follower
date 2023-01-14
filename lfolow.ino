@@ -1,3 +1,6 @@
+////////////////////////////////////////////  THE NAVIGATOR ///////////////////////////////////////////////////////
+
+
 #include <QTRSensors.h>
 const int m11Pin = 7;
 const int m12Pin = 6;
@@ -13,18 +16,11 @@ int m2Speed = 0;
 
  
 
-
-// increase kp’s value and see what happens
-// float kp = 11;
-// float ki = 0.01;
-// float kd = 2.7;
-
- float kp = 12;
+float kp = 12;
 float  ki = 0.01;
- float kd = 3;
+float kd = 3;
 
- //001
- //2.7
+
 
  
 
@@ -72,21 +68,7 @@ void setup() {
   qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, sensorCount);
 
  
- calibrateSensor();
-  // delay(500);
-  // pinMode(LED_BUILTIN, OUTPUT);
-  // digitalWrite(LED_BUILTIN, HIGH); // turn on Arduino's LED to indicate we are in calibration mode
-
-  // // calibrate the sensor. For maximum grade the line follower should do the movement itself, without human interaction.
-  // for (uint16_t i = 0; i < 400; i++)
-  // {
-  //   qtr.calibrate();
-  //   // do motor movement here, with millis() as to not ruin calibration)
-  // }
-  // digitalWrite(LED_BUILTIN, LOW);
-
- 
-
+  calibrateSensor();
   Serial.begin(9600);
 
 }
@@ -96,7 +78,7 @@ void setup() {
 void loop() {
   // inefficient code, written in loop. You must create separate functions
   int error = map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
- // pidControl(error, kp, kd, ki);
+  //pidControl(error, kp, kd, ki);
 
  
 
@@ -138,16 +120,7 @@ void loop() {
  
 
   
-//  DEBUGGING
-//  Serial.print("Error: ");
-//  Serial.println(error);
-//  Serial.print("M1 speed: ");
-//  Serial.println(m1Speed);
-//
-//  Serial.print("M2 speed: ");
-//  Serial.println(m2Speed);
-//
-//  delay(250);
+
 }
 
  
@@ -159,24 +132,18 @@ Serial.println(error);
 
 if (error <= 15 || error >= -15)
 {
- kp = 12;
-ki = 0.1;
- kd = 3;
+  kp = 12;
+  ki = 0.1;
+  kd = 3;
 
-// // float kp = 11;
-// // float ki = 0.01;
-// // float kd = 2.6;
 }
 
 if ((error <= 25 || error >= -25) && (error > 15 || error < -15))
-//if ((error <= 25 || error >= -25))
 {
   kp = 8;
   ki = 0.01;
   kd = 2.2;
-// float kp = 11;
-// float ki = 0.01;
-// float kd = 2.6;
+
 }
 
 if ((error <= 40 || error >= -40) && (error > 25 || error < -25))
@@ -185,9 +152,9 @@ if ((error <= 40 || error >= -40) && (error > 25 || error < -25))
   ki = 0.01;
   kd = 3;
 }
-Serial.println(kp);
-Serial.println(ki);
-Serial.println(kd);
+// Serial.println(kp);
+// Serial.println(ki);
+// Serial.println(kd);
 
 
 
@@ -259,14 +226,14 @@ void calibrateSensor()
       // check if the line is not detected
     
       int line =  map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
-      //delay(50);
-      Serial.println(line);
+
+      //Serial.println(line);
       if (line > 49 ) {
         // line is passed, stop the motors
         setMotorSpeed(0, 0);
-        Serial.println("stop left");
+       // Serial.println("stop left");
         move = 1;
-        //delay(200);
+
       }
     }
     
@@ -278,15 +245,15 @@ void calibrateSensor()
       qtr.calibrate();
       // check if the line is detected
       int line =  map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
-      //delay(50);
-      Serial.println(line);
+
+     // Serial.println(line);
       if (line < -49) 
       {
         // line is detected, stop the motors
         setMotorSpeed(0, 0);
-        Serial.println("stop right");
+      //  Serial.println("stop right");
         move = 0;
-        //delay(200);
+
       }
 
     }
