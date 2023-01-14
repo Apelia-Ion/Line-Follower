@@ -16,9 +16,13 @@ int m2Speed = 0;
 
  
 
-float kp = 12;
+
+// increase kp’s value and see what happens
+
+
+ float kp = 12;
 float  ki = 0.01;
-float kd = 3;
+ float kd = 3;
 
 
 
@@ -68,8 +72,8 @@ void setup() {
   qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, sensorCount);
 
  
-  calibrateSensor();
-  Serial.begin(9600);
+ calibrateSensor();
+ Serial.begin(9600);
 
 }
 
@@ -78,7 +82,7 @@ void setup() {
 void loop() {
   // inefficient code, written in loop. You must create separate functions
   int error = map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
-  //pidControl(error, kp, kd, ki);
+ // pidControl(error, kp, kd, ki);
 
  
 
@@ -120,7 +124,16 @@ void loop() {
  
 
   
-
+//  DEBUGGING
+//  Serial.print("Error: ");
+//  Serial.println(error);
+//  Serial.print("M1 speed: ");
+//  Serial.println(m1Speed);
+//
+//  Serial.print("M2 speed: ");
+//  Serial.println(m2Speed);
+//
+//  delay(250);
 }
 
  
@@ -132,9 +145,9 @@ Serial.println(error);
 
 if (error <= 15 || error >= -15)
 {
-  kp = 12;
-  ki = 0.1;
-  kd = 3;
+ kp = 12;
+ ki = 0.1;
+ kd = 3;
 
 }
 
@@ -152,9 +165,9 @@ if ((error <= 40 || error >= -40) && (error > 25 || error < -25))
   ki = 0.01;
   kd = 3;
 }
-// Serial.println(kp);
-// Serial.println(ki);
-// Serial.println(kd);
+Serial.println(kp);
+Serial.println(ki);
+Serial.println(kd);
 
 
 
@@ -207,7 +220,7 @@ void setMotorSpeed(int motor1Speed, int motor2Speed) {
 
 void calibrateSensor()
 {
-  //delay(500);
+ 
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH); // turn on Arduino's LED to indicate we are in calibration mode
   int move = 0; // 0 -> left 1 -> right
@@ -226,14 +239,14 @@ void calibrateSensor()
       // check if the line is not detected
     
       int line =  map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
-
-      //Serial.println(line);
+      //delay(50);
+      Serial.println(line);
       if (line > 49 ) {
         // line is passed, stop the motors
         setMotorSpeed(0, 0);
-       // Serial.println("stop left");
+        Serial.println("stop left");
         move = 1;
-
+        //delay(200);
       }
     }
     
@@ -245,15 +258,15 @@ void calibrateSensor()
       qtr.calibrate();
       // check if the line is detected
       int line =  map(qtr.readLineBlack(sensorValues), 0, 5000, -50, 50);
-
-     // Serial.println(line);
+      //delay(50);
+      Serial.println(line);
       if (line < -49) 
       {
         // line is detected, stop the motors
         setMotorSpeed(0, 0);
-      //  Serial.println("stop right");
+        Serial.println("stop right");
         move = 0;
-
+        //delay(200);
       }
 
     }
