@@ -51,6 +51,6 @@ https://youtube.com/shorts/LlIahX-9zR4?feature=share
 
 </details>
 
-Link to the collegue's Git Repository: 
+Link to the collegue's Git Repository: https://github.com/StancuDenisaG/Line-follower
 
 
