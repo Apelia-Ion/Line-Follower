@@ -1,12 +1,15 @@
-# :car: Line-Follower :car:
+# :car: Line-Follower :car: 
+## The navigator 
 
-<details open>
+<details>
 <summary>Project Description</summary>
 <br>
-The goal of this project is to design and build a line following robot that can navigate a pre-defined path using infrared sensors and DC motors.
+The goal of this project is to design and build a line following robot that can navigate a pre-defined path using infrared sensors and DC motors. The final course must be finished in 20s or less.
+The robot had to be built and coded from scratch, using the line-follower kit recieved from the robotics lab. In order to follow the line properly, we had to implement a PID algorithm. For the coding part, our team used mostly an emphiric approach, but we also tried to implement a PID control function which should have changed the PID values, according to the plant. 
+
 </details>
 
-<details open>
+<details>
 <summary>Components</summary>
 <br>
 
@@ -27,7 +30,7 @@ The goal of this project is to design and build a line following robot that can 
 
 </details>
 
-<details open>
+<details>
 <summary>Setup</summary>
 <br>
 
@@ -35,9 +38,9 @@ The goal of this project is to design and build a line following robot that can 
 
 </details>
 
-</details>
 
-<details open>
+
+<details >
 <summary>Presentation Links </summary>
 <br>
 Test course:    
@@ -47,5 +50,7 @@ Final course:
 https://youtube.com/shorts/LlIahX-9zR4?feature=share  
 
 </details>
+
+Link to the collegue's Git Repository: 
 
 
